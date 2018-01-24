@@ -1,0 +1,7 @@
+{
+  "todos": [
+    {"id": "29ccd882-0119-11e8-ba89-0ed5f89f718b", "value": "caca", "done": false},
+    {"id": "45a1c1b2-0119-11e8-ba89-0ed5f89f718b", "value": "todo 2", "done": false},
+    {"id": "4b40d3d8-0119-11e8-ba89-0ed5f89f718b", "value": "todo 3", "done": true}
+  ]
+}
