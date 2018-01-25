@@ -1,7 +1,14 @@
 {
-  "todos": [
-    {"id": "29ccd882-0119-11e8-ba89-0ed5f89f718b", "value": "caca", "done": false},
-    {"id": "45a1c1b2-0119-11e8-ba89-0ed5f89f718b", "value": "todo 2", "done": false},
-    {"id": "4b40d3d8-0119-11e8-ba89-0ed5f89f718b", "value": "todo 3", "done": true}
+  "companies": [
+    {"id": "29ccd882-0119-11e8-ba89-0ed5f89f718b", "name": "caca", "address": "false", "phone": "1234"},
+    {"id": "45a1c1b2-0119-11e8-ba89-0ed5f89f718b", "name": "todo 2", "address": "false", "phone": "1234"},
+    {"id": "4b40d3d8-0119-11e8-ba89-0ed5f89f718b", "name": "todo 3", "address": "true", "phone": "1234"}
+  ],
+  "contacts": [
+    {"id": "1", "name": "name1", "email": "1email@email.com", "phone": "1111", "position": "Boss", "company": "caca"},
+    {"id": "2", "name": "name2", "email": "2email@email.com", "phone": "2222", "position": "Jefe", "company": "caca"},
+    {"id": "3", "name": "name3", "email": "3email@email.com", "phone": "3333", "position": "Sobo", "company": "todo2"},
+    {"id": "4", "name": "name4", "email": "4email@email.com", "phone": "4444", "position": "Pisuicas", "company": "todo2"},
+    {"id": "5", "name": "name5", "email": "5email@email.com", "phone": "5555", "position": "", "company": "todo3"}
   ]
 }

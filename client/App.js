@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import TodosContainer from './TodosComponents/TodosContainer'
+import CRMContainer from './CRMComponents/CRMContainer'
 
 class App extends Component {
     render() {
         return (
-          <TodosContainer />
+          <CRMContainer />
         )
     }
 }

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import uuid from 'uuid/v1'
-import TodoList from './TodoList'
+import CRMTable from './CRMTable'
 
-class TodosContainer extends Component{
+class CRMContainer extends Component{
 
     constructor(props){
         super(props)
         this.state = {
-            todos: [
-            ],
+            companies: [ ],
+            contacts: [ ],
             newTodoVal: ''
         }
         this.addToDo = this.addToDo.bind(this);
@@ -18,9 +18,13 @@ class TodosContainer extends Component{
     }
 
     componentDidMount() {
-        fetch('http://localhost:3000/todos')
+        fetch('http://localhost:3000/companies')
             .then(response => response.json())
-            .then(data => this.setState({ todos: data }));
+            .then(data => this.setState({ companies: data }));
+            
+        fetch('http://localhost:3000/contacts')
+        .then(response => response.json())
+        .then(data => this.setState({ contacts: data }));
     }
 
     onChange(ev){
@@ -57,15 +61,13 @@ class TodosContainer extends Component{
     }
 
     render(){
-        return ( <TodoList
-          addToDo={this.addToDo}
-          onChange={this.onChange}
-          todos={this.state.todos} 
-          toDoVal={this.state.newTodoVal}
-          isDone={this.isDone}
-          manageToDo={this.manageToDo}
-        /> )
+        return ( 
+          <CRMTable
+            companies={this.state.companies}
+            contacts={this.state.contacts}
+          /> 
+        )
     }
 }
 
-export default TodosContainer;
+export default CRMContainer;
