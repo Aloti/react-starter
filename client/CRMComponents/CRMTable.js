@@ -1,16 +1,10 @@
-import React, {Component} from 'react'
+import React from 'react'
 import { array, func, String} from 'prop-types'
+
 import TableRow from './TableRow'
 
-class CRMTable extends Component{
-    
-    
+const CRMTable = (props) => {
 
-    constructor(props) {
-        super(props);
-    }
-
-    render(){   
         return (
           <div className='CRMTable container'>
             <div className='companies row'>
@@ -25,9 +19,9 @@ class CRMTable extends Component{
                     </tr>
                   </thead>
                   <tbody>
-                    {this.props.companies.map(function(el){
-                                    return <TableRow key={el.id} company={el} />
-                                })}
+                    {props.companies.map(company => {
+                      return <TableRow key={company.id} company={company} />
+                    })}
                   </tbody>
                 </table>
               </div>
@@ -46,16 +40,15 @@ class CRMTable extends Component{
                     </tr>
                   </thead>
                   <tbody>
-                    {this.props.contacts.map(function(el){
-                                    return <TableRow key={el.id} contact={el} />
-                                })}
+                    {props.contacts.map(contact => {
+                      return <TableRow key={contact.id} contact={contact} />
+                    })}
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
         )
-    }
 }
 
 CRMTable.propTypes = {

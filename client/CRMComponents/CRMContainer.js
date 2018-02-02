@@ -1,30 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+
 import uuid from 'uuid/v1'
 import CRMTable from './CRMTable'
+import { addCompany, getCompanies, getContacts } from './actions'
 
 class CRMContainer extends Component{
 
     constructor(props){
         super(props)
         this.state = {
-            companies: [ ],
-            contacts: [ ],
             newTodoVal: ''
         }
-        this.addToDo = this.addToDo.bind(this);
-        this.onChange = this.onChange.bind(this);
-        this.isDone = this.isDone.bind(this);
-        this.manageToDo = this.manageToDo.bind(this);
     }
 
     componentDidMount() {
-        fetch('http://localhost:3000/companies')
-            .then(response => response.json())
-            .then(data => this.setState({ companies: data }));
-            
-        fetch('http://localhost:3000/contacts')
-        .then(response => response.json())
-        .then(data => this.setState({ contacts: data }));
+        this.props.loadData()
     }
 
     onChange(ev){
@@ -61,13 +52,39 @@ class CRMContainer extends Component{
     }
 
     render(){
-        return ( 
-          <CRMTable
-            companies={this.state.companies}
-            contacts={this.state.contacts}
-          /> 
-        )
+        return this.props.loading
+            ?
+              <span className="spinnerBig">
+                <span className="dot1" />
+                <span className="dot2" />
+              </span>
+            :
+              <CRMTable
+                companies={this.props.companies}
+                contacts={this.props.contacts}
+              /> 
+        
+    }
+
+
+}
+
+function mapStateToProps(state) {
+    return {
+        loading: state.loading,
+        companies: state.companies,
+        contacts: state.contacts
     }
 }
 
-export default CRMContainer;
+function mapDispatchToProps(dispatch){
+    return{
+        loadData: () => {
+            dispatch(getContacts());
+            dispatch(getCompanies())
+        },
+        addTodo: value => dispatch(addCompany(value))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CRMContainer)
