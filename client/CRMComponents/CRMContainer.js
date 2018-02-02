@@ -80,7 +80,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch){
     return{
         loadData: () => {
-            dispatch(getContacts());
+            dispatch(getContacts())
             dispatch(getCompanies())
         },
         addTodo: value => dispatch(addCompany(value))
