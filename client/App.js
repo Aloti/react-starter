@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import CRMContainer from './CRMComponents/CRMContainer'
+import Header from './Header'
 
-class App extends Component {
-    render() {
-        return (
-          <CRMContainer />
-        )
-    }
+const App = () => {
+    return(
+      <div>
+        <Header />
+        <CRMContainer />
+      </div>
+    )
 }
 
 export default App;

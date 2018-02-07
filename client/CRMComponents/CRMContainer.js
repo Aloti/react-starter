@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { Route, Switch, withRouter } from 'react-router-dom'
 
 import uuid from 'uuid/v1'
-import CRMTable from './CRMTable'
+import CompanyTable from '../Company/CompanyTable'
+import ClientTable from '../Client/ClientTable'
 import { addCompany, getCompanies, getContacts } from './actions'
 
 class CRMContainer extends Component{
@@ -52,17 +54,32 @@ class CRMContainer extends Component{
     }
 
     render(){
-        return this.props.loading
-            ?
-              <span className="spinnerBig">
-                <span className="dot1" />
-                <span className="dot2" />
-              </span>
-            :
-              <CRMTable
-                companies={this.props.companies}
-                contacts={this.props.contacts}
-              /> 
+        // return this.props.loading
+        //     ?
+        //       <span className="spinnerBig">
+        //         <span className="dot1" />
+        //         <span className="dot2" />
+        //       </span>
+        //     :
+        
+        return(
+          <Switch>
+            <Route
+              exact 
+              path='/companies'
+              render={(routeProps) => (
+                <CompanyTable {...routeProps} {...this.props} />
+                )}
+            /> 
+            <Route
+              exact
+              path='/contacts'
+              render={(routeProps) => (
+                <ClientTable {...routeProps} {...this.props} />
+                )}
+            />
+          </Switch>
+      )
         
     }
 
@@ -83,8 +100,10 @@ function mapDispatchToProps(dispatch){
             dispatch(getContacts())
             dispatch(getCompanies())
         },
-        addTodo: value => dispatch(addCompany(value))
+        // addTodo: value => dispatch(addCompany(value))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CRMContainer)
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CRMContainer))
