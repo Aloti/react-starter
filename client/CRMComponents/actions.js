@@ -11,6 +11,11 @@ const ADD_COMPANY_SUCCESS = 'ADD_COMPANIES_SUCCESS'
 const ADD_COMPANY_FAILURE = 'ADD_COMPANIES_FAILURE'
 
 
+const GET_COMPANY_REQUEST = 'GET_COMPANY_REQUEST'
+const GET_COMPANY_SUCCESS = 'GET_COMPANY_SUCCESS'
+const GET_COMPANY_FAILURE = 'GET_COMPANY_FAILURE'
+
+
 const GET_CONTACTS_REQUEST = 'GET_CONTACTS_REQUEST'
 const GET_CONTACTS_SUCCESS = 'GET_CONTACTS_SUCCESS'
 const GET_CONTACTS_FAILURE = 'GET_CONTACTS_FAILURE'
@@ -32,6 +37,28 @@ export function getCompanies() {
             .catch(error => {
                 dispatch({
                     type: GET_COMPANIES_FAILURE,
+                    error: error
+                })
+            })
+    }
+}
+
+export function getCompany(id) {
+    return function (dispatch) {
+        dispatch({
+            type: GET_COMPANY_REQUEST
+        })
+        fetch(API_URL+'companies/'+id)
+            .then(response => response.json())
+            .then(data => {
+                dispatch({
+                    type: GET_COMPANY_SUCCESS,
+                    company: data
+                })
+            })
+            .catch(error => {
+                dispatch({
+                    type: GET_COMPANY_FAILURE,
                     error: error
                 })
             })

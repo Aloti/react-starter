@@ -1,5 +1,0 @@
-
-
-const DEFAULT_STATE = {
-
-}

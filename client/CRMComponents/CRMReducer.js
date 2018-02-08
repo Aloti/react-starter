@@ -4,6 +4,17 @@ const DEFAULT_STATE = {
     loading: false,
     companies: [],
     contacts: [],
+    company: {
+        name: '',
+        address: '',
+        phone: '',
+    },
+    contact: {
+        name: '',
+        email: '',
+        phone: '',
+        position: '',
+    },
     error: ''
 }
 
@@ -21,6 +32,24 @@ const crm = (state = DEFAULT_STATE, action) => {
                 companies: action.companies
             }
         case 'GET_COMPANIES_FAILURE':
+            return {
+                ...state,
+                loading: false,
+                error: action.error
+            }
+
+        case 'GET_COMPANY_REQUEST':
+            return {
+                ...state,
+                loading: true
+            }
+        case 'GET_COMPANY_SUCCESS':
+            return {
+                ...state,
+                loading: false,
+                company: action.company
+            }
+        case 'GET_COMPANY_FAILURE':
             return {
                 ...state,
                 loading: false,
@@ -51,11 +80,23 @@ const crm = (state = DEFAULT_STATE, action) => {
                 ...state,
                 companies: [...state.companies, { ...action.company }],
             }
+        
+        case 'ADD_CONTACT_SUCCESS':
+            return {
+                ...state,
+                companies: [...state.companies, { ...action.company }],
+            }
 
         case 'DELETE_COMPANY_SUCCESS':
             return {
                 ...state,
                 companies: state.companies.filter(item => item.id !== action.id)
+            }
+
+        case 'DELETE_CONTACT_SUCCESS':
+            return {
+                ...state,
+                contacts: state.contacts.filter(item => item.id !== action.id)
             }
 
         default:

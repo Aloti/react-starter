@@ -5,7 +5,8 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 import uuid from 'uuid/v1'
 import CompanyTable from '../Company/CompanyTable'
 import ClientTable from '../Client/ClientTable'
-import { addCompany, getCompanies, getContacts } from './actions'
+import CompanySingle from '../Company/CompanySingle'
+import { addCompany, getCompanies, getCompany, getContacts } from './actions'
 
 class CRMContainer extends Component{
 
@@ -54,32 +55,38 @@ class CRMContainer extends Component{
     }
 
     render(){
-        // return this.props.loading
-        //     ?
-        //       <span className="spinnerBig">
-        //         <span className="dot1" />
-        //         <span className="dot2" />
-        //       </span>
-        //     :
+        return this.props.loading
+            ?
+              <span className="spinnerBig">
+                <span className="dot1" />
+                <span className="dot2" />
+              </span>
+            :
         
-        return(
-          <Switch>
-            <Route
-              exact 
-              path='/companies'
-              render={(routeProps) => (
-                <CompanyTable {...routeProps} {...this.props} />
+              <Switch>
+                <Route
+                  exact 
+                  path='/companies'
+                  render={(routeProps) => (
+                    <CompanyTable {...routeProps} {...this.props} />
                 )}
-            /> 
-            <Route
-              exact
-              path='/contacts'
-              render={(routeProps) => (
-                <ClientTable {...routeProps} {...this.props} />
+                />
+                <Route
+                  path='/companies/:id'
+                  component={CompanySingle}
+                //   render={(routeProps) => (
+                //     <CompanySingle {...routeProps} {...this.props} />
+                // )}
+                />
+                <Route
+                  exact
+                  path='/contacts'
+                  render={(routeProps) => (
+                    <ClientTable {...routeProps} {...this.props} />
                 )}
-            />
-          </Switch>
-      )
+                />
+              </Switch>
+      
         
     }
 
@@ -101,6 +108,7 @@ function mapDispatchToProps(dispatch){
             dispatch(getCompanies())
         },
         // addTodo: value => dispatch(addCompany(value))
+        getCompany: id => dispatch(getCompany(id))
     }
 }
 

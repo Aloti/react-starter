@@ -1,11 +1,14 @@
 import uuid from 'uuid/v1'
 
 // API URL Constant
-const API_URL = 'http://localhost:3000/companies'
+const API_URL = 'http://localhost:3000/companies/'
 
 const GET_COMPANIES_REQUEST = 'GET_COMPANIES_REQUEST'
 const GET_COMPANIES_SUCCESS = 'GET_COMPANIES_SUCCESS'
 const GET_COMPANIES_FAILURE = 'GET_COMPANIES_FAILURE'
+const GET_COMPANY_REQUEST = 'GET_COMPANY_REQUEST'
+const GET_COMPANY_SUCCESS = 'GET_COMPANY_SUCCESS'
+const GET_COMPANY_FAILURE = 'GET_COMPANY_FAILURE'
 const ADD_COMPANY_REQUEST = 'ADD_COMPANY_REQUEST'
 const ADD_COMPANY_SUCCESS = 'ADD_COMPANY_SUCCESS'
 const ADD_COMPANY_FAILURE = 'ADD_COMPANY_FAILURE'
@@ -30,6 +33,28 @@ export function getCompanies() {
             .catch(error => {
                 dispatch({
                     type: GET_COMPANIES_FAILURE,
+                    error: error
+                })
+            })
+    }
+}
+
+export function getCompany(id) {
+    return function (dispatch) {
+        dispatch({
+            type: GET_COMPANY_REQUEST
+        })
+        fetch(API_URL+id)
+            .then(response => response.json())
+            .then(data => {
+                dispatch({
+                    type: GET_COMPANY_SUCCESS,
+                    company: data
+                })
+            })
+            .catch(error => {
+                dispatch({
+                    type: GET_COMPANY_FAILURE,
                     error: error
                 })
             })
